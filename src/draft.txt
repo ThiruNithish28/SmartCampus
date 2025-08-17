@@ -1,0 +1,107 @@
+Task 
+ 1. search                  -- done
+ 2. pagination              -- done
+ 3. download                -- done
+ 4. no of rows              -- done
+ 5. toster validation       -- done
+ 6. duplicate validation    
+ 7. six column              -- done
+ 8. side nav                -- done
+
+
+
+
+
+
+
+<!-- active
+: 
+true
+address
+: 
+"123, papllam illam"
+address_type
+: 
+"perment"
+age
+: 
+"23"
+date_of_birth
+: 
+"2025-08-11"
+department
+: 
+"cse"
+district
+: 
+"thanjavur"
+email
+: 
+"valavannithis@gmail.com"
+expiry_year
+: 
+"2024"
+full_name
+: 
+"Thiru"
+gender
+: 
+"male"
+issue_year
+: 
+"2023"
+mobile_number
+: 
+"123131333"
+nationality
+: 
+"indian"
+pincode
+: 
+"613005"
+roll_no
+: 
+"123"
+state
+: 
+"tamilnadu" -->
+
+
+
+ <div *ngFor="let section of studentFormSections" class="section">
+            <div class="section_title">{{section.title | titlecase}}</div>
+            <div class="formGrid">
+                <div *ngFor="let field of section.subSec" class="formGroup">
+                    <!-- <label for="">{{field.name}}</label>
+                    <input [type]="field.type"
+                           [placeholder]="field.placeholder"
+                           [formControlName]="getControlName(field.name)"
+                    /> -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{field.name}}</mat-label>
+
+                        <ng-container [ngSwitch]='field.type'>
+                            <!-- Select dropdown -->
+                            <mat-select *ngSwitchCase="'select'" [formControlName]="getControlName(field.name)">
+                                <mat-option *ngFor="let option of field.options" [value]="option">
+                                    {{option | titlecase}}
+                                </mat-option>
+                            </mat-select>
+
+                            <mat-radio-group *ngSwitchCase="'radio'" [formControlName]="getControlName(field.name)">
+                                <mat-radio-button *ngFor="let option of field.options" [value]="option">
+                                {{option}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+
+                            <input *ngSwitchDefault="" matInput [type]="field.type" [placeholder]="field.placeholder"
+                                [formControlName]="getControlName(field.name)">
+                        </ng-container>
+                        <!-- <mat-hint *ngIf="1==2">Hint</mat-hint> -->
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+
+

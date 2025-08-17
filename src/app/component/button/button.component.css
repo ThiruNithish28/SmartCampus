@@ -1,0 +1,16 @@
+button{
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 10px 30px;
+    font-weight: 600;
+    color: #fff;
+    /* background-color: rgb(7, 136, 211); */
+    background-color: var(--primary-color);
+    border: 0;
+    border-radius: 5px;
+}
+button:hover{
+    /* background-color:rgba(7, 136, 211, 0.658); */
+    background-color: #2d387a;
+    font-weight: 700;
+}

@@ -1,0 +1,181 @@
+<div class="SC_container">
+  <div class="SC_header">Student Register Form</div>
+  <form class="SC_form" [formGroup]="studentForm" (ngSubmit)="submitForm()">
+    <div *ngFor="let section of studentFormSections" class="SC_section">
+      <div class="SC_section_title">{{ section.title | titlecase }}</div>
+      <div class="SC_formGrid">
+        <div *ngFor="let field of section.subSec" class="SC_formGroup">
+          <ng-container *ngIf="field.type === 'select'">
+            <mat-form-field appearance="outline">
+              <mat-label>
+                {{ field.name }}
+                <span
+                  class="required-star"
+                  *ngIf="field.validate?.includes('required')"
+                  >*</span>
+              </mat-label>
+              <mat-select [formControlName]="getControlName(field.name)">
+                <mat-option
+                  *ngFor="let option of field.options"
+                  [value]="option"
+                >
+                  {{ option | titlecase }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container *ngIf="field.type === 'radio'">
+            <mat-label class="SC_radio-group-label">{{ field.name }}</mat-label>
+            <mat-radio-group
+              [formControlName]="getControlName(field.name)"
+              class="SC_radio-group"
+            >
+              <mat-radio-button
+                class="custom-radio-button"
+                *ngFor="let option of field.options"
+                [value]="option"
+              >
+                {{ option | titlecase }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </ng-container>
+
+          <ng-container *ngIf="field.type === 'date'">
+            <mat-form-field appearance="outline">
+              <mat-label>
+                {{ field.name }}
+                <span
+                  class="required-star"
+                  *ngIf="field.validate?.includes('required')"
+                  >*</span>
+              </mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                [formControlName]="getControlName(field.name)"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container
+            *ngIf="
+              field.type !== 'select' &&
+              field.type !== 'radio' &&
+              field.type !== 'date'
+            "
+          >
+            <mat-form-field appearance="outline">
+              <mat-label>
+                {{ field.name }}
+                <span
+                  class="required-star"
+                  *ngIf="field.validate?.includes('required')"
+                  >*</span>
+              </mat-label>
+              <input
+                matInput
+                [type]="field.type"
+                [placeholder]="field.placeholder"
+                [formControlName]="getControlName(field.name)"
+              />
+              
+              <mat-error
+                *ngIf="
+                  studentForm.get(getControlName(field.name))?.errors?.required
+                "
+              >
+                {{ field.name }} is required
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  studentForm.get(getControlName(field.name))?.errors?.email
+                "
+              >
+                {{ field.name }} is should be email (contains @)
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  studentForm.get(getControlName(field.name))?.errors?.minlength
+                "
+              >
+                {{ field.name }} must be at least
+                {{
+                  studentForm.get(getControlName(field.name))?.errors?.minlength
+                    .requiredLength
+                }}
+                characters.
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  studentForm.get(getControlName(field.name))?.errors?.maxlength
+                "
+              >
+                {{ field.name }} must be atmost
+                {{
+                  studentForm.get(getControlName(field.name))?.errors?.maxlength
+                    .requiredLength
+                }}
+                characters.
+              </mat-error>
+              <mat-error
+                *ngIf="studentForm.get(getControlName(field.name))?.errors?.min"
+              >
+                {{ field.name }} must be start from year
+                {{ studentForm.get(getControlName(field.name))?.errors?.min }}.
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  studentForm
+                    .get(getControlName(field.name))
+                    ?.hasError('underAge')
+                "
+              >
+                Age must be at least
+                {{
+                  studentForm
+                    .get(getControlName(field.name))
+                    ?.getError("underAge")?.requiredAge
+                }}
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  studentForm
+                    .get(getControlName(field.name))
+                    ?.hasError('yearValidation')
+                "
+              >
+                Passout year must be greater than or equal to Start year
+              </mat-error>
+            </mat-form-field>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="SC_cta">
+      <!-- <button type="submit"> save </button> -->
+      <app-button
+        text="reset"
+        (btnClick)="resetForm()"
+        type="button"
+      ></app-button>
+      <app-button
+        *ngIf="!isEditForm"
+        class="add-btn"
+        text="add"
+        type="submit"
+      ></app-button>
+      <app-button
+        *ngIf="isEditForm"
+        class="edit-btn"
+        text="update"
+        (btnClick)="updateForm()"
+      ></app-button>
+    </div>
+  </form>
+</div>

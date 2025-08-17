@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&display=swap');
+
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+
+
+@import 'ngx-toastr/toastr';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --primary-color:#3f51b5;
+}
+body{
+    font-family: "Open Sans", sans-serif;
+}
+
+li, ul{
+    list-style: none;
+    text-transform: capitalize;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.SC_icon-btn{
+  color: gray;
+}
+/* .SC_edit-btn{
+    color: rgba(0, 128, 38, 0.671);
+}
+
+.SC_delete-btn
+{
+    color: red;
+} */
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+  
+  .mat-radio-button.mat-accent .mat-radio-inner-circle{
+background-color: var(--primary-color);
+  }
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+    border-color: var(--primary-color);
+  }
+ /* .custom-radio-button .mat-radio-outer-circle {
+    height: 15px; 
+    width: 15px;  
+  }
+
+  .custom-radio-button .mat-radio-inner-circle {
+    height: 8px; 
+    width: 8px;  
+  }
+
+  .custom-radio-button .mat-radio-label-content {
+    font-size: 12px; 
+  }
+
+  .custom-radio-button .mat-radio-container {
+    
+    padding: 2px;
+  } */

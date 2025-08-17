@@ -1,0 +1,24 @@
+{
+    "students": [
+        {
+            "active": true,
+            "address": "123, papllam illam",
+            "address_type": "perment",
+            "age": "23",
+            "date_of_birth": "2025-08-11",
+            "department": "cse",
+            "district": "thanjavur",
+            "email": "valavannithis@gmail.com",
+            "expiry_year": "2024",
+            "full_name": "Thiru",
+            "gender": "male",
+            "issue_year": "2023",
+            "mobile_number": "123131333",
+            "nationality": "indian",
+            "pincode": "613005",
+            "roll_no": "123",
+            "blood_group": "B+",
+            "state": "tamilnadu"
+        }
+    ]
+}

@@ -1,0 +1,181 @@
+<div class="SC_header">
+    <div class="SC_title">Student Dashboard</div>
+    <div>Manage and monitor student records</div>
+</div>
+<div class="SC_tableParentContainer">
+    <div class="SC_table_nav" *ngIf="searchValue ||studentList && studentList.length >= 1 ">
+        <div>Student Details</div>
+        <div class="SC_table_nav--CTA">
+            <!-- search function -->
+            <div class="SC_search">
+                 <mat-icon class="mat-icon-gray">search</mat-icon>
+                <input type="text" placeholder="Search by name" (input)="handleSearch()" [(ngModel)]="searchValue" />
+            </div>
+            <div class="SC_table_nav--CTA--btn">
+                <!-- download menu -->
+                <button mat-stroked-button [matMenuTriggerFor]="downloadMenu">
+                    <mat-icon>download</mat-icon>
+                    download
+                </button>
+    
+                <mat-menu  #downloadMenu="matMenu">
+                    <button
+                    
+                        mat-menu-item 
+                        *ngFor="let option of downloadOption"
+                        (click)="downloadTable(option)"
+                    >
+                    as {{option}}
+                    </button>
+                </mat-menu>
+    
+                <!-- column selction -->
+                 <button mat-stroked-button [matMenuTriggerFor]="columnSelection" (menuOpened)="onTableSettingMenuOpen(columnSearch)">
+                    <mat-icon>settings</mat-icon>
+                    columns
+                 </button>
+    
+                 <mat-menu  #columnSelection="matMenu" class="SC_table-settings-menu">
+                    <div class="SC_table-settings-menu-header--container">
+    
+                        <div class="SC_table-header">
+                            We recommend six column view for better visibility
+                        </div>
+                        <!-- column search -->
+                        <div class="SC_table_colSearch--container" 
+                            (click)="$event.stopPropagation()"
+                        >
+                            <mat-icon>search</mat-icon>
+                            <input type="text" placeholder="Search" (input)="searchColumn($event)" #columnSearch>
+                        </div>
+                    </div>
+                    <!-- column list -->
+                     <div class="SC_table-column-list">
+                         <mat-selection-list #columnsSelected
+                          (click)="$event.stopPropagation()"
+                          (selectionChange) = "updateColumnSelection(columnsSelected.selectedOptions.selected)"
+                         >
+                             <mat-list-option (click)="toggleSelectAll(columnsSelected)">
+                                 select all
+                             </mat-list-option>
+                             <mat-list-option 
+                                 *ngFor="let col of columnListCopy"
+                                 [selected]="col.isDefault"
+                                 [value]="col.name"
+                             >{{col.name.replace("_"," ") | titlecase}}</mat-list-option>
+                         </mat-selection-list>
+                     </div>
+                    <div class="SC_table-actions">
+    
+                    <button mat-raised-button
+                        color="primary"
+                        (click) = "applyColumnSelection(columnsSelected.selectedOptions.selected)"
+                    >
+                        Apply
+                    </button>
+    
+                    <button mat-raised-button
+                        (click) ="resetColumnSelection()"
+                    >
+                        Reset
+                    </button>
+                    </div>
+                 </mat-menu>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="studentList && studentList.length >= 1; then showTable; else promptToAdd"></div>
+    <ng-template #showTable>
+        <div class="table-container">
+            <table>
+                <tr >
+                    <ng-container *ngFor="let col of columnsList">
+                        <th *ngIf="col.isDefault">{{col.name.replace("_"," ")}}</th>
+                    </ng-container>
+                    <th>action</th>
+                </tr>
+    
+                <tbody cdkDropList [cdkDropListData]="studentList" (cdkDropListDropped)="drop($event)">
+                    <tr *ngFor="let student of studentList"  cdkDrag class="SC_table-row">
+    
+                        <ng-container *ngFor="let col of columnsList" >
+                            <td *ngIf="col.isDefault">{{student[col.name]}}</td>
+                        </ng-container>
+                       
+                        <td class="SC_table-cta">
+                            <button mat-icon-button color="primary" class="SC_icon-btn SC_edit-btn" aria-label="Edit button with edit icon"
+                                (click)="editStudent(student.roll_no)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button class="SC_icon-btn SC_delete-btn"
+                                aria-label="delete button with delete icon" (click)="deleteStudent(student.roll_no)">
+                                <mat-icon color="warn">delete</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+    
+            </table>
+        </div>
+        <div class="SC_Pagination">
+            <div class="SC_Pagination--details">
+                <div class="SC_Pagination--pageNo">
+                    <div>Rows per page:</div>
+                    <mat-form-field appearance="legacy" class="SC_Pagination--pageNoSelector">
+                     
+                        <mat-select [(value)]="ITEMS_PER_PAGE" (selectionChange)="handleItems_per_page($event)">
+                            <mat-option [value]="5">5</mat-option>
+                            <mat-option [value]="10">10</mat-option>
+                            <mat-option [value]="15">15</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- <div>
+                    Page {{table_pageNumber + 1}} of {{MAX_PAGE}}
+                </div> -->
+                <div>
+                    <span>{{startIndex + 1}} - {{endIndex}}</span> of <span>{{OriginalStudentList.length}}</span>
+                </div>
+                
+            </div>
+            <div class="SC_Pagination-control">
+                <button mat-icon-button (click) ="perPage()" [disabled]="checkDisable('prev')">
+                    <mat-icon>chevron_left</mat-icon>
+                </button>
+                <div>{{table_pageNumber + 1}}</div>
+                <button mat-icon-button (click) ="nextPage()"  [disabled]="checkDisable('next')">
+                    <mat-icon >chevron_right</mat-icon>
+                </button>
+            </div>
+        </div>
+        
+    </ng-template>
+       
+
+
+    <ng-template #promptToAdd>
+        <div *ngIf="!searchValue">there is no student. If you want to add <a routerLink="/new-student">student</a></div> 
+        <div *ngIf="searchValue">No such value is Found</div>
+    </ng-template>
+   
+</div>
+
+<div class="SC_dashboard-cta">
+    <app-button text="add" (btnClick)="addStudent()"></app-button>
+</div>
+
+<!-- <div>
+    <div class="delete_confirm--header">
+        <div>Delete record</div>
+        <button>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div>
+        Are you sure you want to delete Untitled Brand Kit Project? Deleting the record will prmenanet delete
+        <input type="text" name="confirmDelete" placeholder="write delete to proceed" >
+        <button (click)="deleteStudent(student.roll_no)">delete</button>
+    </div>
+</div> -->

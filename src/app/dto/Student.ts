@@ -1,0 +1,21 @@
+export interface Student{
+    full_name: string,
+    date_of_birth:string, 
+    email:string,
+    mobile_number:number, 
+    gender: string, 
+    age: number,
+    roll_no: string, 
+    department: string,
+    start_year: string, 
+    passout_year:string, 
+    address_type:string, 
+    address:string, 
+    nationality:string,
+    state: string,
+    district: string, 
+    pincode: number, 
+    blood_group:string,
+    active: boolean,
+    [key: string]: any;
+}

@@ -1,0 +1,53 @@
+.SC_app_container{
+    display: flex;
+    gap: 10px;
+    height: 100dvh;
+    overflow: hidden;
+}
+nav,
+.SC_aside_nav{
+    flex:1 1 15%;
+    /* background: rgb(111, 151, 202); */
+    /* background: #171717; */
+    background-color: var(--primary-color);
+    border-right: 1px solid rgba(59, 58, 58, 0.301);
+    color: #fff;
+    height: 100dvh;
+    padding: 2% 0;
+}
+
+.SC_main-section{
+    flex: 1 1 85%;
+    width: 100%;
+    height: 100vh; 
+    overflow-y: scroll;
+    padding: 25px 5px;
+}
+.SC_logo{
+    display: flex;
+    font-size: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    border-bottom:1px solid rgba(78, 78, 78, 0.438) ;
+}
+.SC_logo-img{
+    width:60px;
+    aspect-ratio: 1/1;
+}
+.SC_logo-text{
+    display: flex;
+    flex-direction: column;
+}
+.SC_nav-lists{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding:5px;
+}
+.SC_nav-lists li{
+    cursor: pointer;
+    padding: 10px 20px;
+}
+.SC_nav-lists li:hover{
+    background-color: #323e49d8;
+}

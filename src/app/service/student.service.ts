@@ -1,0 +1,503 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Student } from '../dto/Student';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StudentService {
+  students: any = [
+{active
+  : 
+  true,
+  address
+  : 
+  "123, papllam illam",
+  address_type
+  : 
+  "perment",
+  age
+  : 
+  "23",
+  date_of_birth
+  : 
+  "2025-08-11",
+  department
+  : 
+  "cse",
+  district
+  : 
+  "thanjavur",
+  email
+  : 
+  "valavannithis@gmail.com",
+  passout_year
+  : 
+  "2024",
+  full_name
+  : 
+  "Thiru",
+  gender
+  : 
+  "male",
+  start_year
+  : 
+  "2023",
+  mobile_number
+  : 
+  "123131333",
+  nationality
+  : 
+  "indian",
+  pincode
+  : 
+  "613005",
+  roll_no
+  : 
+  "1",
+  blood_group
+    : 
+    "B+",
+  state
+  : 
+  "tamilnadu"},
+  {active
+    : 
+    true,
+    address
+    : 
+    "",
+    address_type
+    : 
+    "",
+    age
+    : 
+    "32",
+    blood_group
+    : 
+    "A+",
+    date_of_birth
+    : 
+    "2025-08-12",
+    department
+    : 
+    "CSE",
+    district
+    : 
+    "",
+    email
+    : 
+    "sdfsdfds@gmail.com",
+    passout_year
+    : 
+    "",
+    full_name
+    : 
+    "trumal",
+    gender
+    : 
+    "male",
+    start_year
+    : 
+    "",
+    mobile_number
+    : 
+    "2323232323",
+    nationality
+    : 
+    "",
+    pincode
+    : 
+    "232323",
+    roll_no
+    : 
+    "2",
+    state
+    : 
+    ""}
+    ,
+    {active
+      : 
+      true,
+      address
+      : 
+      "123, papllam illam",
+      address_type
+      : 
+      "perment",
+      age
+      : 
+      "23",
+      date_of_birth
+      : 
+      "2025-08-11",
+      department
+      : 
+      "cse",
+      district
+      : 
+      "thanjavur",
+      email
+      : 
+      "valavannithis@gmail.com",
+      passout_year
+      : 
+      "2024",
+      full_name
+      : 
+      "Thiru",
+      gender
+      : 
+      "male",
+      start_year
+      : 
+      "2023",
+      mobile_number
+      : 
+      "123131333",
+      nationality
+      : 
+      "indian",
+      pincode
+      : 
+      "613005",
+      roll_no
+      : 
+      "3",
+      blood_group
+        : 
+        "B+",
+      state
+      : 
+      "tamilnadu"},
+      {active
+        : 
+        true,
+        address
+        : 
+        "",
+        address_type
+        : 
+        "",
+        age
+        : 
+        "32",
+        blood_group
+        : 
+        "A+",
+        date_of_birth
+        : 
+        "2025-08-12",
+        department
+        : 
+        "CSE",
+        district
+        : 
+        "",
+        email
+        : 
+        "chellam@gmail.com",
+        passout_year
+        : 
+        "",
+        full_name
+        : 
+        "muthupandi",
+        gender
+        : 
+        "male",
+        start_year
+        : 
+        "",
+        mobile_number
+        : 
+        "2323232323",
+        nationality
+        : 
+        "",
+        pincode
+        : 
+        "232323",
+        roll_no
+        : 
+        "456",
+        state
+        : 
+        ""}
+        ,
+        {active
+          : 
+          true,
+          address
+          : 
+          "123, papllam illam",
+          address_type
+          : 
+          "perment",
+          age
+          : 
+          "23",
+          date_of_birth
+          : 
+          "2025-08-11",
+          department
+          : 
+          "it",
+          district
+          : 
+          "thanjavur",
+          email
+          : 
+          "ram@gmail.com",
+          passout_year
+          : 
+          "2024",
+          full_name
+          : 
+          "ram",
+          gender
+          : 
+          "male",
+          start_year
+          : 
+          "2023",
+          mobile_number
+          : 
+          "123131333",
+          nationality
+          : 
+          "indian",
+          pincode
+          : 
+          "613005",
+          roll_no
+          : 
+          "53",
+          blood_group
+            : 
+            "B+",
+          state
+          : 
+          "tamilnadu"},
+          {active
+      : 
+      true,
+      address
+      : 
+      "123, papllam illam",
+      address_type
+      : 
+      "perment",
+      age
+      : 
+      "23",
+      date_of_birth
+      : 
+      "2025-08-11",
+      department
+      : 
+      "cse",
+      district
+      : 
+      "thanjavur",
+      email
+      : 
+      "valavannithis@gmail.com",
+      passout_year
+      : 
+      "2024",
+      full_name
+      : 
+      "Thiru",
+      gender
+      : 
+      "male",
+      start_year
+      : 
+      "2023",
+      mobile_number
+      : 
+      "123131333",
+      nationality
+      : 
+      "indian",
+      pincode
+      : 
+      "613005",
+      roll_no
+      : 
+      "3",
+      blood_group
+        : 
+        "B+",
+      state
+      : 
+      "tamilnadu"},
+      {active
+        : 
+        true,
+        address
+        : 
+        "",
+        address_type
+        : 
+        "",
+        age
+        : 
+        "32",
+        blood_group
+        : 
+        "A+",
+        date_of_birth
+        : 
+        "2025-08-12",
+        department
+        : 
+        "CSE",
+        district
+        : 
+        "",
+        email
+        : 
+        "chellam@gmail.com",
+        passout_year
+        : 
+        "",
+        full_name
+        : 
+        "muthupandi",
+        gender
+        : 
+        "male",
+        start_year
+        : 
+        "",
+        mobile_number
+        : 
+        "2323232323",
+        nationality
+        : 
+        "",
+        pincode
+        : 
+        "232323",
+        roll_no
+        : 
+        "456",
+        state
+        : 
+        ""},
+    {active
+  : 
+  true,
+  address
+  : 
+  "123, papllam illam",
+  address_type
+  : 
+  "perment",
+  age
+  : 
+  "23",
+  date_of_birth
+  : 
+  "2025-08-11",
+  department
+  : 
+  "cse",
+  district
+  : 
+  "thanjavur",
+  email
+  : 
+  "valavannithis@gmail.com",
+  passout_year
+  : 
+  "2024",
+  full_name
+  : 
+  "Thiru",
+  gender
+  : 
+  "male",
+  start_year
+  : 
+  "2023",
+  mobile_number
+  : 
+  "123131333",
+  nationality
+  : 
+  "indian",
+  pincode
+  : 
+  "613005",
+  roll_no
+  : 
+  "1",
+  blood_group
+    : 
+    "B+",
+  state
+  : 
+  "tamilnadu"},    
+  ];
+
+  constructor(private http: HttpClient) {
+    console.log("Student service instanse created...")
+  }
+
+  getStudents(){
+    const activeStudents: any[]  =[];
+    this.students.forEach((std:any) =>{
+      activeStudents.push(std);
+    })
+    return activeStudents;
+  }
+
+  addStudent(newStudent: any):boolean {
+   let isExisit:boolean = false;
+    if(newStudent){
+      this.students.map((std: any) => {
+        if(newStudent.roll_no === std.roll_no){
+          isExisit=true;
+          return;
+        }
+      })
+      if(!isExisit) this.students.push({ ...newStudent, active: true });
+    }
+    return !isExisit
+  }
+
+ 
+  deleteStudent(id:string){
+    
+     this.students = this.students.filter((std:Student) => std.roll_no != id);
+  }
+ 
+  updateStudent(updatedStudent:any){
+   for(var i=0; i<this.students.length;i++){
+    if(this.students[i].roll_no === updatedStudent.roll_no){
+      this.students[i]={...updatedStudent, active:true}
+      break;
+    }
+   }
+  }
+
+  getStudentById(rollNo: string):any {
+    return this.students.find((std:any) => std.roll_no === rollNo);
+  }
+}
+
+
+/* when https request
+// getStudents(): Observable<Student[]>{
+  //   return this.http.get<Student[]>("http://localhost:3000/students");
+  // }
+  // deleteStudent(id:string): Observable<unknown> {
+
+  //   // return this.http.delete(`http://localhost:3000/students/${id}`);
+
+  // }
+*/
