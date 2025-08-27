@@ -35,7 +35,7 @@
                     columns
                  </button>
     
-                 <mat-menu  #columnSelection="matMenu" class="SC_table-settings-menu">
+              
                     <div class="SC_table-settings-menu-header--container">
     
                         <div class="SC_table-header">
@@ -44,11 +44,7 @@
                         <!-- column search -->
                         <div class="SC_table_colSearch--container" 
                             (click)="$event.stopPropagation()"
-                        >
-                            <mat-icon>search</mat-icon>
-                            <input type="text" placeholder="Search" (input)="searchColumn($event)" #columnSearch>
-                        </div>
-                    </div>
+                        
                     <!-- column list -->
                      <div class="SC_table-column-list">
                          <mat-selection-list #columnsSelected
