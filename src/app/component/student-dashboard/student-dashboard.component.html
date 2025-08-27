@@ -47,20 +47,17 @@
                         
                     <!-- column list -->
                      <div class="SC_table-column-list">
-                         <mat-selection-list #columnsSelected
+ #columnsSelected
                           (click)="$event.stopPropagation()"
                           (selectionChange) = "updateColumnSelection(columnsSelected.selectedOptions.selected)"
-                         >
-                             <mat-list-option (click)="toggleSelectAll(columnsSelected)">
+                         (click)="toggleSelectAll(columnsSelected)">
                                  select all
-                             </mat-list-option>
-                             <mat-list-option 
+                             </list-option>
+                             <-list-option 
                                  *ngFor="let col of columnListCopy"
                                  [selected]="col.isDefault"
                                  [value]="col.name"
-                             >{{col.name.replace("_"," ") | titlecase}}</mat-list-option>
-                         </mat-selection-list>
-                     </div>
+                             >{{col.name.replace("_"
                     <div class="SC_table-actions">
     
                     <button mat-raised-button
